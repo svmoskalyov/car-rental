@@ -6,7 +6,9 @@
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
-      "services/*": ["services/*"]
+      "redax/*": ["redax/*"],
+      "services/*": ["services/*"],
+      "utils/*": ["utils/*"]
     }
   }
 }

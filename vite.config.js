@@ -10,7 +10,9 @@ export default defineConfig({
       assets: '/src/assets',
       components: '/src/components',
       pages: '/src/pages',
+      redax: '/src/redax',
       services: '/src/services',
+      utils: '/src/utils',
     },
   },
 });
