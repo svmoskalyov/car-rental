@@ -10,39 +10,22 @@ export const getTotalCars = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const data = await getTotalCarsApi();
-      console.log('🚀 ~ --- operation --- data.length:', data.length);
-      return data.length;
+      return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
-  },
-  {
-    condition: (_, { getState }) => {
-      const { items } = getState().cars;
-      if (!items.length) return true;
-      return false;
-    },
   },
 );
 
 export const getCars = createAsyncThunk(
   'cars/getPage',
   async (pg, thunkApi) => {
-    console.log('🚀 ~  --- operation --- page', pg);
     try {
       const data = await getCarsApi(pg);
-      console.log('🚀 ~ data:', data);
-      return data;
+      return { data, pg };
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
-  },
-  {
-    condition: (_, { getState }) => {
-      const { items } = getState().cars;
-      if (!items.length) return true;
-      return false;
-    },
   },
 );
 

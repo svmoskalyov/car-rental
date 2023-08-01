@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCars,
+  selectPage,
   selectError,
   selectIsLoading,
   selectTotalCars,
@@ -17,30 +18,29 @@ export const CatalogsPage = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const catalog = useSelector(selectCars);
+  console.log('🚀 ~ CatalogsPage ~ catalog:', catalog.length);
   const totalCars = useSelector(selectTotalCars);
-  const [page, setPage] = useState(0);
+  console.log('🚀 ~ CatalogsPage ~ totalCars:', totalCars.length);
+  const page = useSelector(selectPage);
+  console.log('🚀 ~ CatalogsPage ~ page:', page);
 
   const onClickLoadMore = () => {
-    dispatch(getCars(page));
-    setPage(prev => prev + 1);
+    dispatch(getCars(page + 1));
   };
 
   useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
-
       if (catalog.length === 0) {
         dispatch(getCars(1));
-        setPage(2);
+        dispatch(getTotalCars());
       }
-
-      dispatch(getTotalCars());
     }
-  }, [catalog.length, dispatch]);
+  }, [dispatch, catalog.length]);
 
   return (
     <>
-      {isLoading && !error && <b>Request in progress...</b>}
+      {isLoading && !error && <div>Loadind...</div>}
       <CarsList catalog={catalog} />
 
       {catalog.length < totalCars && (
@@ -49,7 +49,11 @@ export const CatalogsPage = () => {
           onClick={onClickLoadMore}
           aria-label="button load more"
         >
-          Load more
+          {isLoading && !error && page !== 0 ? (
+            <div>Loading...</div>
+          ) : (
+            ' Load more'
+          )}
         </Button>
       )}
     </>

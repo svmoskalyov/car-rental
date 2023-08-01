@@ -16,7 +16,6 @@ import carsReducer from './cars/carsSlice';
 const persistCarsConfig = {
   key: 'cars',
   storage,
-  // whitelist: ['favorites'],
 };
 
 const persistedCarsReducer = persistReducer(persistCarsConfig, carsReducer);
