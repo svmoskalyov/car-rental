@@ -7,6 +7,11 @@ axios.defaults.baseURL = 'https://64c3e72367cfdca3b66070c2.mockapi.io';
 //   return response.data;
 // };
 
+export const getTotalCarsApi = async () => {
+  const response = await axios.get('/adverts');
+  return response.data;
+};
+
 export const getCarsApi = async (page = 1) => {
   console.log('🚀 ~ getCarsApi ~ page:', page);
   const response = await axios.get('/adverts', {
@@ -17,22 +22,24 @@ export const getCarsApi = async (page = 1) => {
   });
 
   return response.data;
-
-  // const url = new URL('https://64c3e72367cfdca3b66070c2.mockapi.io/adverts');
-  // url.searchParams.append('completed', false);
-  // url.searchParams.append('page', page);
-  // url.searchParams.append('limit', 8);
-  // const res = await fetch(url);
-  // return res.json();
 };
 
-// export const updateCarStatusApi = async ({ id, isFav }) => {
-//   const response = await axios
-//     .patch(`/adverts/${id}`, { isFav })
-//     .then(({ data }) => ({ ...data, id }));
+export const updateCarStatusApi = async ({ carId, isFav }) => {
+  console.log('🚀 ~ updateCarStatusApi ~ carId:', carId);
+  console.log('🚀 ~ updateCarStatusApi ~ isFav:', isFav);
 
-//   console.log('🚀 ~ updateCarStatusApi ~ response:', response);
-//   console.log('🚀 ~ updateCarStatusApi ~ response:', response.data);
+  // const response = await axios
+  //   .patch(`/adverts/${id}`, { isFav })
+  //   .then(({ data }) => ({ ...data, id }));
 
-//   return response.data;
-// };
+  // const response = await axios.put(`/adverts/${carId}`, {
+  //   isFav: !isFav,
+  // });
+
+  const response = await axios.put(`/adverts/${carId}`, { isFav });
+
+  console.log('🚀 ~ updateCarStatusApi ~ response:', response);
+  console.log('🚀 ~ updateCarStatusApi ~ response:', response.data);
+
+  return response.data;
+};

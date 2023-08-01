@@ -19,10 +19,7 @@ const persistCarsConfig = {
   // whitelist: ['favorites'],
 };
 
-const persistedCarsReducer = persistReducer(
-  persistCarsConfig,
-  carsReducer,
-);
+const persistedCarsReducer = persistReducer(persistCarsConfig, carsReducer);
 
 export const store = configureStore({
   reducer: {

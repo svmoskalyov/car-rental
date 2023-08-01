@@ -1,37 +1,49 @@
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectCars,
+  selectError,
+  selectIsLoading,
+  selectTotalCars,
+} from 'redax/cars/carsSelectors';
+import { getCars, getTotalCars } from 'redax/cars/carsOperations';
 import { Button } from 'components/Button/Button';
 import { CarsList } from 'components/CarsList/CarsList';
-import { useLoaderData } from 'react-router-dom';
 import s from './CatalogsPage.module.scss';
-import { useState } from 'react';
-import { getCarsApi } from 'services/mockApi';
 
 export const CatalogsPage = () => {
-  const { cars } = useLoaderData();
-  const [catalog, setCatalog] = useState([]);
-  console.log('🚀 ~ CatalogsPage ~ catalog:', catalog);
-  const [BtnLoadMoreIs, setBtnLoadMoreIs] = useState(true);
-  const [page, setPage] = useState(2);
-  console.log('🚀 ~ CatalogsPage ~ page:', page);
+  const dispatch = useDispatch();
+  const initialized = useRef(false);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const catalog = useSelector(selectCars);
+  const totalCars = useSelector(selectTotalCars);
+  const [page, setPage] = useState(0);
 
-  const onClickLoadMore = async () => {
-    if (catalog.length === 0) {
-      setCatalog(cars._data);
-    }
-
-    const car = await getCarsApi(page);
-    setCatalog(prevState => [...prevState, ...car]);
-    setPage(prevState => prevState + 1);
-
-    if (car.length < 8) {
-      setBtnLoadMoreIs(false);
-    }
+  const onClickLoadMore = () => {
+    dispatch(getCars(page));
+    setPage(prev => prev + 1);
   };
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+
+      if (catalog.length === 0) {
+        dispatch(getCars(1));
+        setPage(2);
+      }
+
+      dispatch(getTotalCars());
+    }
+  }, [catalog.length, dispatch]);
 
   return (
     <>
-      <CarsList catalog={catalog.length === 0 ? cars : catalog} />
+      {isLoading && !error && <b>Request in progress...</b>}
+      <CarsList catalog={catalog} />
 
-      {BtnLoadMoreIs && (
+      {catalog.length < totalCars && (
         <Button
           className={s.btnLoadMore}
           onClick={onClickLoadMore}
@@ -43,39 +55,3 @@ export const CatalogsPage = () => {
     </>
   );
 };
-
-// async function getCars(page = 1) {
-//   // console.log('--- getCars');
-//   // console.log('🚀 ~ getCars ~ page:', page);
-
-//   const url = new URL('https://64c3e72367cfdca3b66070c2.mockapi.io/adverts');
-//   url.searchParams.append('completed', false);
-//   url.searchParams.append('page', page);
-//   url.searchParams.append('limit', 8);
-
-//   const res = await fetch(url);
-//   return res.json();
-// }
-
-// async function getCars() {
-//   const res = await fetch(
-//     'https://64c3e72367cfdca3b66070c2.mockapi.io/adverts',
-//   );
-//   return res.json();
-// }
-
-// export const catalogLoader = async () => {
-//   // console.log('--- catalogLoader');
-//   // console.log({ request, params });
-//   // const res = await fetch(
-//   //   'https://64c3e72367cfdca3b66070c2.mockapi.io//adverts',
-//   // );
-//   // return res.json();
-
-//   return defer({
-//     cars: getCarsApi(),
-//   });
-//   // return defer({
-//   //   cars: getCars(),
-//   // });
-// };

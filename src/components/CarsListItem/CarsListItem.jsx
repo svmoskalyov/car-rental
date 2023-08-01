@@ -5,16 +5,17 @@
 import { useState } from 'react';
 import s from './CarsListItem.module.scss';
 import { Modal } from 'components/Modal/Modal';
+// import { useDispatch } from 'react-redux';
+// import { updateCarStatus } from 'redax/cars/carsOperations';
 
 export const CarsListItem = ({ carId, year, make, model, isFav }) => {
+  // const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
 
+  const toggleModal = () => {
+    setShowModal(prevState => !prevState);
+  };
 
-const [showModal, setShowModal] = useState(false);
-
-const toggleModal = () => {
-  setShowModal(prevState => !prevState);
-};
-  
   return (
     <>
       <div key={carId} className={s.cardItem} onClick={toggleModal}>
@@ -23,18 +24,17 @@ const toggleModal = () => {
           <p>{make}</p>
           <p>{model}</p>
 
-          <label>
+          {/* <label>
             <input
               type="checkbox"
               name="status"
               checked={isFav}
-              onChange={
-                () => {}
-                // dispatch(updateCarStatus({ carId, isFav: !isFav }))
+              onChange={() =>
+                dispatch(updateCarStatus({ carId, isFav: !isFav }))
               }
             />
             Done
-          </label>
+          </label> */}
         </li>
       </div>
 
@@ -46,18 +46,17 @@ const toggleModal = () => {
               <p>{make}</p>
               <p>{model}</p>
 
-              <label>
+              {/* <label>
                 <input
                   type="checkbox"
                   name="status"
                   checked={isFav}
-                  onChange={
-                    () => {}
-                    // dispatch(updateCarStatus({ carId, isFav: !isFav }))
+                  onChange={() =>
+                    dispatch(updateCarStatus({ carId, isFav: !isFav }))
                   }
                 />
                 Done
-              </label>
+              </label> */}
             </li>
           </div>
         </Modal>
