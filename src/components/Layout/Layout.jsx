@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { AppBar } from 'components/AppBar/AppBar';
+import { Loader } from 'components/Loader/Loader';
 import s from './Layout.module.scss';
 
 export const Layout = () => {
@@ -8,7 +9,7 @@ export const Layout = () => {
     <div className={s.container}>
       <AppBar />
       <main>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader name="Grid" />}>
           <Outlet />
         </Suspense>
       </main>

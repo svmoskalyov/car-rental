@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import { CarsList } from 'components/CarsList/CarsList';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +27,7 @@ export const FavoritesPage = () => {
 
   return (
     <>
-      {isLoading && !error && <div>Loadind...</div>}
+      {isLoading && !error && <Loader name="Hearts" />}
       <CarsList catalog={favorites} />
     </>
   );
