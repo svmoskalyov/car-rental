@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://64c3e72367cfdca3b66070c2.mockapi.io';
+axios.defaults.baseURL = import.meta.env.VITE_DB_HOST;
 
 export const getTotalCarsApi = async () => {
   const response = await axios.get('/adverts');
