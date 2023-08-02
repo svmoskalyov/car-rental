@@ -10,7 +10,7 @@ export const HomePage = () => {
           textShadow: '-4px 5px 5px rgba(0,0,0,0.3)',
         }}
       >
-        Welcome to Rental cars 🚘
+        Welcome to Car Rental 🚘
       </h1>
       <p
         style={{
@@ -20,11 +20,10 @@ export const HomePage = () => {
           width: '50%',
         }}
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-        cupiditate, alias repudiandae perferendis quidem sint, sequi esse odio
-        dignissimos quisquam ut ex harum necessitatibus, similique consequatur
-        architecto ipsa sit nihil. Molestias sed inventore praesentium laborum,
-        ea hic quidem mollitia!
+        On the website, you can choose a car based on a photo and description,
+        if you click the button Learn more, you will see detailed information
+        about the car. You can add a car you like to your favorites and view the
+        added cars on the favorites tab.
       </p>
       <div
         style={{
