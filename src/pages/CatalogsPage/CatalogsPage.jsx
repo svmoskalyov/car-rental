@@ -18,11 +18,8 @@ export const CatalogsPage = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const catalog = useSelector(selectCars);
-  console.log('🚀 ~ CatalogsPage ~ catalog:', catalog.length);
   const totalCars = useSelector(selectTotalCars);
-  console.log('🚀 ~ CatalogsPage ~ totalCars:', totalCars.length);
   const page = useSelector(selectPage);
-  console.log('🚀 ~ CatalogsPage ~ page:', page);
 
   const onClickLoadMore = () => {
     dispatch(getCars(page + 1));
@@ -40,7 +37,7 @@ export const CatalogsPage = () => {
 
   return (
     <>
-      {isLoading && !error && <div>Loadind...</div>}
+      {isLoading && !error && totalCars === 0 && <div>Loadind...</div>}
       <CarsList catalog={catalog} />
 
       {catalog.length < totalCars && (

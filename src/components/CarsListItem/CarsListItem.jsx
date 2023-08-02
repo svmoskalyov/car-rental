@@ -1,11 +1,28 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCarStatus } from 'redax/cars/carsOperations';
 import { Modal } from 'components/Modal/Modal';
+import { FiHeart } from 'react-icons/fi';
+import { Button } from 'components/Button/Button';
+import { CarsListItemDetails } from 'components/CarsListItemDetails/CarsListItemDetails';
 import s from './CarsListItem.module.scss';
 
-export const CarsListItem = ({ id, year, make, model, isFav }) => {
+export const CarsListItem = el => {
+  const {
+    id,
+    year,
+    make,
+    model,
+    type,
+    img,
+    functionalities,
+    rentalPrice,
+    rentalCompany,
+    address,
+    mileage,
+    isFav,
+  } = el;
+
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
@@ -16,35 +33,50 @@ export const CarsListItem = ({ id, year, make, model, isFav }) => {
   return (
     <>
       <div key={id} className={s.cardItem}>
-        <div onClick={toggleModal}>image</div>
-        <li>
-          <p>{year}</p>
-          <p>{make}</p>
-          <p>{model}</p>
+        <div>
+          <img
+            className={s.img}
+            loading="lazy"
+            src={img && `${img}`}
+            alt="image car"
+          />
 
-          <label>
+          <label className={s.chekboxHeart}>
             <input
               type="checkbox"
               name="status"
               checked={isFav}
-              onChange={() =>
-                dispatch(updateCarStatus({ id, isFav: !isFav }))
-              }
+              onChange={() => dispatch(updateCarStatus({ id, isFav: !isFav }))}
             />
-            Done
+            <FiHeart className={s.heart} />
           </label>
-        </li>
+
+          <div className={s.titleWrapper}>
+            <h2 className={s.title}>
+              {make}
+              <span className={s.titleAccent}> {model}, </span>
+              {year}
+            </h2>
+            <h2 className={s.title}>{rentalPrice}</h2>
+          </div>
+
+          <ul className={s.cartList}>
+            <li className={s.cartListItem}>{address.split(',')[1]}</li>
+            <li className={s.cartListItem}>{address.split(',')[2]}</li>
+            <li className={s.cartListItem}>{rentalCompany}</li>
+            <li className={s.cartListItem}>{type}</li>
+            <li className={s.cartListItem}>{model}</li>
+            <li className={s.cartListItem}>{mileage}</li>
+            <li className={s.cartListItem}>{functionalities[0]}</li>
+          </ul>
+        </div>
+
+        <Button onClick={toggleModal}>Learn more</Button>
       </div>
 
       {showModal && (
         <Modal onClose={toggleModal}>
-          <div className={s.cardItem}>
-            <li>
-              <p>{year}</p>
-              <p>{make}</p>
-              <p>{model}</p>
-            </li>
-          </div>
+          <CarsListItemDetails {...el} />
         </Modal>
       )}
     </>
