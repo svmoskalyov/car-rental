@@ -1,8 +1,12 @@
-# React + Vite
+# 🚘 [CAR RENTAL](https://car-rental-everiday.netlify.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 📝 About website
+On the website, you can choose a car based on a photo and description, if you click the button Learn more, you will see detailed information about the car. You can add a car you like to your favorites and view the added cars on the favorites tab.
 
-Currently, two official plugins are available:
+### 🛠 Technologies stack
+React, React DOM, React Router, React Icons, Redux, Redux Toolkit, Redux Persist, SASS, JavaScript, HTML, Vite, ESLint, GitHub, and libraries (Axios, etc.)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+![image](https://github.com/svmoskalyov/car-rental/assets/107481840/96b89387-3e16-4ec3-8cd9-90d81fdcf5f1)
+![image](https://github.com/svmoskalyov/car-rental/assets/107481840/04ad6884-bdac-4011-a7a7-b24f9d8a279d)
+![image](https://github.com/svmoskalyov/car-rental/assets/107481840/d8b88664-9c54-41e1-9246-44d2cd2c7ea8)
