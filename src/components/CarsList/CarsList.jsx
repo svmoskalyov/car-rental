@@ -11,7 +11,7 @@ export const CarsList = ({ catalog }) => {
       <Suspense fallback={<Loader name="Grid" />}>
         <Await resolve={catalog}>
           {resolvedCars =>
-            resolvedCars.map(el => {
+            resolvedCars?.map(el => {
               return <CarsListItem key={el.id} {...el} />;
             })
           }
