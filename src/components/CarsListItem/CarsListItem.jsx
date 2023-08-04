@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { updateCarStatus } from 'redax/cars/carsOperations';
 import { Modal } from 'components/Modal/Modal';
 import { FiHeart } from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
 import { Button } from 'components/Button/Button';
 import { CarsListItemDetails } from 'components/CarsListItemDetails/CarsListItemDetails';
 import s from './CarsListItem.module.scss';
@@ -32,12 +33,14 @@ export const CarsListItem = el => {
 
   return (
     <>
-      <div key={id} className={s.cardItem}>
+      <li key={id} className={s.cardItem}>
         <div>
           <img
             className={s.img}
             loading="lazy"
             src={img && `${img}`}
+            width={274}
+            height={268}
             alt="image car"
           />
 
@@ -72,11 +75,16 @@ export const CarsListItem = el => {
         </div>
 
         <Button onClick={toggleModal}>Learn more</Button>
-      </div>
+      </li>
 
       {showModal && (
         <Modal onClose={toggleModal}>
-          <CarsListItemDetails {...el} />
+          <div className={s.itemDetailsWrapper}>
+            <CarsListItemDetails {...el} />
+            <Button className={s.btnModalCloseWrapper} onClick={toggleModal}>
+              <IoClose className={s.btnModalClose} />
+            </Button>
+          </div>
         </Modal>
       )}
     </>

@@ -8,9 +8,6 @@
   height: 426px;
   border-radius: 12px;
   background-color: #ffffff;
-  -webkit-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.75);
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -24,7 +21,7 @@
 }
 
 .img {
-  width: 100%;
+  width: 274px;
   height: 268px;
   object-fit: cover;
   border-radius: 12px;
@@ -122,4 +119,35 @@
 
 .cartListItem:last-child {
   border: none;
+}
+
+.itemDetailsWrapper {
+  position: relative;
+  padding: 40px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+.btnModalCloseWrapper {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  color: #000000;
+  background-color: transparent;
+  border: none;
+}
+
+.btnModalClose {
+  width: 100%;
+  height: 100%;
+}
+
+.btnModalCloseWrapper:hover,
+.btnModalCloseWrapper:focus-visible {
+  background-color: transparent;
+  color: #0b44cd;
 }
