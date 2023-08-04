@@ -22,9 +22,12 @@ export const Modal = ({ children, onClose }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
+    document.documentElement.style.overflow = 'hidden';
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      document.documentElement.style.overflowX = 'hidden';
+      document.documentElement.style.overflowY = 'auto';
     };
   }, [handleKeyDown]);
 
