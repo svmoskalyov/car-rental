@@ -21,11 +21,13 @@ export const CarsListItemDetails = el => {
 
   return (
     <div key={id} className={s.cardItem}>
-      <div>
+      <div className={s.cardWrapper}>
         <img
           className={s.img}
           loading="lazy"
           src={img && `${img}`}
+          width={461}
+          height={248}
           alt="image car"
         />
 
@@ -51,14 +53,14 @@ export const CarsListItemDetails = el => {
 
         <ul>
           <li>
-            {accessories.map((e, i) => (
+            {accessories?.map((e, i) => (
               <span key={i} className={s.cartListItem}>
                 {e}
               </span>
             ))}
           </li>
           <li>
-            {functionalities.map((e, i) => (
+            {functionalities?.map((e, i) => (
               <span key={i} className={s.cartListItem}>
                 {e}
               </span>
@@ -96,7 +98,7 @@ export const CarsListItemDetails = el => {
         </ul>
       </div>
 
-      <a href="tel:+380730000000">
+      <a className={s.btnRentalTel} href="tel:+380730000000">
         <Button className={s.btnRental}>Rental car</Button>
       </a>
     </div>
